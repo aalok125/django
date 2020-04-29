@@ -7,10 +7,10 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ['title', 'category_image', 'parent', 'status']
     readonly_fields = ['category_image']
 
-    # image show in admin list
+    # image show in admin lsit
     def category_image(self, obj):
         if obj.id:
-            return mark_safe('<img src="%s" height="150">' % obj.image.url)
+            return '<img src="%s" height="150">' % obj.image.url
         return ''
 
     category_image.allow_tags = True

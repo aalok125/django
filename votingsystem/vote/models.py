@@ -1,10 +1,12 @@
 from django.db import models
+from django.utils.text import slugify
+
 
 # Create your models here.
 
 class Category(models.Model):
     title = models.CharField(max_length=255, unique=True)
-    slug = models.CharField(max_length=255, unique=True)
+    slug = models.SlugField(max_length=255, unique=True)
     status = models.BooleanField(default=True)
     image = models.ImageField(upload_to='uploads/images/categories', blank=True, null=True)
     icon = models.CharField(max_length=100, null=True, blank=True)
@@ -17,14 +19,14 @@ class Category(models.Model):
 
 class Tag(models.Model):
     title = models.CharField(max_length=225, unique=True)
-    slug = models.CharField(max_length=225, unique=True)
+    slug = models.SlugField(max_length=225, unique=True)
 
     def __str__(self):
         return self.title
 
 class Question(models.Model):
     title = models.CharField(max_length=255, unique=True)
-    slug = models.CharField(max_length=255, unique=True)
+    slug = models.SlugField(max_length=255, unique=True)
     status = models.BooleanField(default=True)
     image = models.ImageField(upload_to='uploads/images/categories', blank=True, null=True)
     category = models.ForeignKey(to='Category', null=True, blank=True, on_delete=models.CASCADE)
@@ -88,6 +90,9 @@ class UserSearchLog(models.Model):
 
     def __str__(self):
         return self.guest_user
+
+
+
 
 
 
