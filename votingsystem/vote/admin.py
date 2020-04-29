@@ -10,7 +10,10 @@ class CategoryAdmin(admin.ModelAdmin):
     # image show in admin lsit
     def category_image(self, obj):
         if obj.id:
-            return '<img src="%s" height="150">' % obj.image.url
+            if obj.image:
+                return '<img src="%s" height="150" />' % obj.image.url
+            else:
+                return "No Image Added"
         return ''
 
     category_image.allow_tags = True

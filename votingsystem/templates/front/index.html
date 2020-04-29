@@ -1,0 +1,446 @@
+{% extends 'front/master.html' %}
+
+{% block contents %}
+	
+	<div class="banner">
+		<div class="banner-content container">
+			<div class="recent-searches">
+                <div class="trend-search">
+                    Trending Searches:
+                </div>
+				<ul>
+					
+					<li>
+						<a href=""><i class="fa fa-futbol"></i> Sports</a>
+					</li>
+					<li>
+						<a href=""><i class="fa fa-video"></i> Movies</a>
+					</li>
+					<li>
+						<a href=""><i class="fa fa-music"></i> Songs</a>
+					</li>
+					<li>
+						<a href=""><i class="fa fa-user"></i> Actors</a>
+					</li>
+					
+				</ul>
+			</div>
+			<form action="">
+				<div class="form-group search">
+					<input
+						type="text"
+						placeholder="Search for category"
+						class="form-control"
+					/>
+				</div>
+				<div class="form-group search-btn">
+					<button type="submit"><i class="fa fa-search"></i> <span class="d-none d-md-inline-block">Search</span></button>
+				</div>
+			</form>
+			<div class="banner-info">
+				Info About the company that would give idea about what the site is
+				about.
+			</div>
+		</div>
+		<div class="down-button">
+			<i class="fa fa-arrow-down"></i>
+		</div>
+	</div>
+	<div class="category-section">
+		<div class="container" id="cataccordion">
+			<div class="right-arrow">
+				<i class="fa fa-arrow-right"></i>
+			</div>
+			<div class="category-nav nav-pills">
+				<li class="nav-item">
+					<a
+						class="nav-link active"
+						data-toggle="show"
+						data-parent="#cataccordion"
+						data-target="#home"
+					>
+						<i class="fa fa-futbol"></i> Sports</a
+					>
+				</li>
+				<li class="nav-item">
+					<a
+						class="nav-link"
+						data-toggle="show"
+						data-parent="#cataccordion"
+						data-target="#menu1"
+						><i class="fa fa-video"></i> Movies</a
+					>
+				</li>
+				<li class="nav-item">
+					<a
+						class="nav-link"
+						data-toggle="show"
+						data-parent="#cataccordion"
+						data-target="#menu2"
+						><i class="fa fa-music"></i> Songs</a
+					>
+				</li>
+				<li class="nav-item">
+					<a
+						class="nav-link"
+						data-toggle="show"
+						data-parent="#cataccordion"
+						data-target="#menu2"
+						><i class="fa fa-user"></i> Actors</a
+					>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" data-toggle="collapse" data-target="#menu2"
+						><i class="fa fa-heartbeat"></i> Health</a
+					>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" data-toggle="collapse" data-target="#menu2"
+						><i class="fa fa-chart-line"></i> Business</a
+					>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" data-toggle="collapse" data-target="#menu2"
+						><i class="fa fa-wifi"></i> Social Media</a
+					>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" data-toggle="collapse" data-target="#menu2"
+						><i class="fa fa-microchip"></i> Technology</a
+					>
+				</li>
+			</div>
+
+			<!-- Tab panes -->
+			<div class="category-content">
+				<div class="panel-collapse collapse in" id="home">
+					<div class="cat-display-container">
+						<div class="row">
+							<div class="col-md-3 col-6">
+								<a href="category.html">
+									<div class="cat-item">
+										<div class="img-container">
+											<img
+												src="assets/images/football.jpg"
+												class="img-fluid"
+												alt=""
+											/>
+										</div>
+										<div class="cat-title">
+											Football
+										</div>
+									</div>
+								</a>
+							</div>
+							<div class="col-md-3 col-6">
+								<a href="category.html">
+									<div class="cat-item">
+										<div class="img-container">
+											<img
+												src="assets/images/cricket.jpg"
+												class="img-fluid"
+												alt=""
+											/>
+										</div>
+										<div class="cat-title">
+											Cricket
+										</div>
+									</div>
+								</a>
+							</div>
+							<div class="col-md-3 col-6">
+								<a href="category.html">
+									<div class="cat-item">
+										<div class="img-container">
+											<img
+												src="assets/images/volleyball.jpg"
+												class="img-fluid"
+												alt=""
+											/>
+										</div>
+										<div class="cat-title">
+											Volleyball
+										</div>
+									</div>
+								</a>
+							</div>
+							<div class="col-md-3 col-6">
+								<a href="category.html">
+									<div class="cat-item">
+										<div class="img-container">
+											<img
+												src="assets/images/basketball.jpg"
+												class="img-fluid"
+												alt=""
+											/>
+										</div>
+										<div class="cat-title">
+											Basketball
+										</div>
+									</div>
+								</a>
+                            </div>
+                            <div class="col-md-3 col-6">
+								<a href="category.html">
+									<div class="cat-item">
+										<div class="img-container">
+											<img
+												src="assets/images/volleyball.jpg"
+												class="img-fluid"
+												alt=""
+											/>
+										</div>
+										<div class="cat-title">
+											Volleyball
+										</div>
+									</div>
+								</a>
+							</div>
+							<div class="col-md-3 col-6">
+								<a href="category.html">
+									<div class="cat-item">
+										<div class="img-container">
+											<img
+												src="assets/images/basketball.jpg"
+												class="img-fluid"
+												alt=""
+											/>
+										</div>
+										<div class="cat-title">
+											Basketball
+										</div>
+									</div>
+								</a>
+                            </div>
+                            <div class="col-md-3 col-6">
+								<a href="category.html">
+									<div class="cat-item">
+										<div class="img-container">
+											<img
+												src="assets/images/football.jpg"
+												class="img-fluid"
+												alt=""
+											/>
+										</div>
+										<div class="cat-title">
+											Football
+										</div>
+									</div>
+								</a>
+							</div>
+							<div class="col-md-3 col-6">
+								<a href="category.html">
+									<div class="cat-item">
+										<div class="img-container">
+											<img
+												src="assets/images/cricket.jpg"
+												class="img-fluid"
+												alt=""
+											/>
+										</div>
+										<div class="cat-title">
+											Cricket
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel-collapse collapse" id="menu1">second</div>
+				<div class="panel-collapse collapse" id="menu2">third</div>
+			</div>
+		</div>
+    </div>
+    <div class="trending-question">
+        <div class="container">
+            <div class="trending-subtitle">
+                Most Trending Voting Question
+            </div>
+
+           
+           
+            <div class="trending-content">
+                <div class="trending-question-item">
+                    <div class="trending-title">
+                        <h2>Vote for the Best Footballer of the Universe</h2>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 col-6">
+                            <div class="question-item">
+                                <div class="img-container">
+                                    <img src="assets/images/messi.jpg" class="img-fluid" alt="">
+                                </div>
+                                <div class="name">Messi</div>
+                                <a href="" class="vote">
+                                    <i class="fa fa-thumbs-up"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <div class="question-item">
+                                <div class="img-container">
+                                    <img src="assets/images/ronaldo.jpg" class="img-fluid" alt="">
+                                </div>
+                                <div class="name">Ronaldo</div>
+                                <a href="" class="vote">
+                                    <i class="fa fa-thumbs-up"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <div class="question-item">
+                                <div class="img-container">
+                                    <img src="assets/images/salah.jpg" class="img-fluid" alt="">
+                                </div>
+                                <div class="name">Salah</div>
+                                <a href="" class="vote">
+                                    <i class="fa fa-thumbs-up"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <div class="question-item">
+                                <div class="img-container">
+                                    <img src="assets/images/nemar.jpeg" class="img-fluid" alt="">
+                                </div>
+                                <div class="name">Nemar Jr.</div>
+                                <a href="" class="vote">
+                                    <i class="fa fa-thumbs-up"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="more-btn">
+                        <a href="" class="btn btn-primary">Show More</a>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+    <div class="blog-section">
+        <div class="container">
+            <div class="blog-title">
+                Latest Blogs
+            </div>
+            <div class="blog-container">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a href="" class="blog-item">
+                                    <div class="img-container">
+                                        <img src="assets/images/cricket.jpg" alt="" class="img-fluid">
+                                        <div class="img-overylay">
+                                                <div class="overlay-text">
+                                                    <div class="title">
+                                                        Messi Scores 6 goals in a Single Game
+                                                    </div>
+                                                    <div class="subtitle">
+                                                        2020-06-06
+                                                    </div>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="" class="blog-item">
+                                    <div class="img-container">
+                                        <img src="assets/images/basketball.jpg" alt="" class="img-fluid">
+                                        <div class="img-overylay">
+                                                <div class="overlay-text">
+                                                    <div class="title">
+                                                        Messi Scores 6 goals in a Single Game
+                                                    </div>
+                                                    <div class="subtitle">
+                                                        2020-06-06
+                                                    </div>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="" class="blog-item">
+                                    <div class="img-container">
+                                        <img src="assets/images/basketball.jpg" alt="" class="img-fluid">
+                                        <div class="img-overylay">
+                                                <div class="overlay-text">
+                                                    <div class="title">
+                                                        Messi Scores 6 goals in a Single Game
+                                                    </div>
+                                                    <div class="subtitle">
+                                                        2020-06-06
+                                                    </div>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                       
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a href="" class="blog-item">
+                                    <div class="img-container">
+                                        <img src="assets/images/cricket.jpg" alt="" class="img-fluid">
+                                        <div class="img-overylay">
+                                                <div class="overlay-text">
+                                                    <div class="title">
+                                                        Messi Scores 6 goals in a Single Game
+                                                    </div>
+                                                    <div class="subtitle">
+                                                        2020-06-06
+                                                    </div>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-12">
+                                <a href="" class="blog-item">
+                                    <div class="img-container">
+                                        <img src="assets/images/volleyball.jpg" alt="" class="img-fluid">
+                                        <div class="img-overylay">
+                                                <div class="overlay-text">
+                                                    <div class="title">
+                                                        Messi Scores 6 goals in a Single Game
+                                                    </div>
+                                                    <div class="subtitle">
+                                                        2020-06-06
+                                                    </div>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-12">
+                                <a href="" class="blog-item">
+                                    <div class="img-container">
+                                        <img src="assets/images/basketball.jpg" alt="" class="img-fluid">
+                                        <div class="img-overylay">
+                                                <div class="overlay-text">
+                                                    <div class="title">
+                                                        Messi Scores 6 goals in a Single Game
+                                                    </div>
+                                                    <div class="subtitle">
+                                                        2020-06-06
+                                                    </div>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
