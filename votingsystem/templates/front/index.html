@@ -1,5 +1,8 @@
 {% extends 'front/master.html' %}
 
+{% block stylesheet %}
+{% endblock %}
+
 {% block contents %}
 	
 	<div class="banner">
@@ -9,7 +12,6 @@
                     Trending Searches:
                 </div>
 				<ul>
-					
 					<li>
 						<a href=""><i class="fa fa-futbol"></i> Sports</a>
 					</li>
@@ -52,203 +54,52 @@
 				<i class="fa fa-arrow-right"></i>
 			</div>
 			<div class="category-nav nav-pills">
-				<li class="nav-item">
-					<a
-						class="nav-link active"
-						data-toggle="show"
-						data-parent="#cataccordion"
-						data-target="#home"
-					>
-						<i class="fa fa-futbol"></i> Sports</a
-					>
-				</li>
-				<li class="nav-item">
-					<a
-						class="nav-link"
-						data-toggle="show"
-						data-parent="#cataccordion"
-						data-target="#menu1"
-						><i class="fa fa-video"></i> Movies</a
-					>
-				</li>
-				<li class="nav-item">
-					<a
-						class="nav-link"
-						data-toggle="show"
-						data-parent="#cataccordion"
-						data-target="#menu2"
-						><i class="fa fa-music"></i> Songs</a
-					>
-				</li>
-				<li class="nav-item">
-					<a
-						class="nav-link"
-						data-toggle="show"
-						data-parent="#cataccordion"
-						data-target="#menu2"
-						><i class="fa fa-user"></i> Actors</a
-					>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" data-toggle="collapse" data-target="#menu2"
-						><i class="fa fa-heartbeat"></i> Health</a
-					>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" data-toggle="collapse" data-target="#menu2"
-						><i class="fa fa-chart-line"></i> Business</a
-					>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" data-toggle="collapse" data-target="#menu2"
-						><i class="fa fa-wifi"></i> Social Media</a
-					>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" data-toggle="collapse" data-target="#menu2"
-						><i class="fa fa-microchip"></i> Technology</a
-					>
-				</li>
+				
+				{% for category in categories %}
+					<li class="nav-item">
+						<a
+							class="nav-link {% if category.active %}active{% endif %}"
+							data-toggle="show"
+							data-parent="#cataccordion"
+							data-target="#tab{{category.id}}"
+						>
+							<i class="{{category.icon}}"></i>{{ category.title }}</a
+						>
+					</li>
+				{% endfor %}
 			</div>
 
 			<!-- Tab panes -->
 			<div class="category-content">
-				<div class="panel-collapse collapse in" id="home">
-					<div class="cat-display-container">
-						<div class="row">
-							<div class="col-md-3 col-6">
-								<a href="category.html">
-									<div class="cat-item">
-										<div class="img-container">
-											<img
-												src="assets/images/football.jpg"
-												class="img-fluid"
-												alt=""
-											/>
+				{% for category in categories %}
+					<div class="panel-collapse collapse {% if category.active %}in{% endif %}" id="tab{{category.id}}">
+						<div class="cat-display-container">
+							<div class="row">
+								{% if category.children %}
+								{% for child in category.children %}
+								<div class="col-md-3 col-6">
+									<a href="category.html">
+										<div class="cat-item">
+											<div class="img-container">
+												<img
+													src="{{child.image.url}}"
+													class="img-fluid"
+													alt=""
+												/>
+											</div>
+											<div class="cat-title">
+												{{child.title}}
+											</div>
 										</div>
-										<div class="cat-title">
-											Football
-										</div>
-									</div>
-								</a>
-							</div>
-							<div class="col-md-3 col-6">
-								<a href="category.html">
-									<div class="cat-item">
-										<div class="img-container">
-											<img
-												src="assets/images/cricket.jpg"
-												class="img-fluid"
-												alt=""
-											/>
-										</div>
-										<div class="cat-title">
-											Cricket
-										</div>
-									</div>
-								</a>
-							</div>
-							<div class="col-md-3 col-6">
-								<a href="category.html">
-									<div class="cat-item">
-										<div class="img-container">
-											<img
-												src="assets/images/volleyball.jpg"
-												class="img-fluid"
-												alt=""
-											/>
-										</div>
-										<div class="cat-title">
-											Volleyball
-										</div>
-									</div>
-								</a>
-							</div>
-							<div class="col-md-3 col-6">
-								<a href="category.html">
-									<div class="cat-item">
-										<div class="img-container">
-											<img
-												src="assets/images/basketball.jpg"
-												class="img-fluid"
-												alt=""
-											/>
-										</div>
-										<div class="cat-title">
-											Basketball
-										</div>
-									</div>
-								</a>
-                            </div>
-                            <div class="col-md-3 col-6">
-								<a href="category.html">
-									<div class="cat-item">
-										<div class="img-container">
-											<img
-												src="assets/images/volleyball.jpg"
-												class="img-fluid"
-												alt=""
-											/>
-										</div>
-										<div class="cat-title">
-											Volleyball
-										</div>
-									</div>
-								</a>
-							</div>
-							<div class="col-md-3 col-6">
-								<a href="category.html">
-									<div class="cat-item">
-										<div class="img-container">
-											<img
-												src="assets/images/basketball.jpg"
-												class="img-fluid"
-												alt=""
-											/>
-										</div>
-										<div class="cat-title">
-											Basketball
-										</div>
-									</div>
-								</a>
-                            </div>
-                            <div class="col-md-3 col-6">
-								<a href="category.html">
-									<div class="cat-item">
-										<div class="img-container">
-											<img
-												src="assets/images/football.jpg"
-												class="img-fluid"
-												alt=""
-											/>
-										</div>
-										<div class="cat-title">
-											Football
-										</div>
-									</div>
-								</a>
-							</div>
-							<div class="col-md-3 col-6">
-								<a href="category.html">
-									<div class="cat-item">
-										<div class="img-container">
-											<img
-												src="assets/images/cricket.jpg"
-												class="img-fluid"
-												alt=""
-											/>
-										</div>
-										<div class="cat-title">
-											Cricket
-										</div>
-									</div>
-								</a>
+									</a>
+								</div>
+								{% endfor %}
+								{% endif %}
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="panel-collapse collapse" id="menu1">second</div>
-				<div class="panel-collapse collapse" id="menu2">third</div>
+				{% endfor %}
+				
 			</div>
 		</div>
     </div>
@@ -263,57 +114,28 @@
             <div class="trending-content">
                 <div class="trending-question-item">
                     <div class="trending-title">
-                        <h2>Vote for the Best Footballer of the Universe</h2>
+                        <h2>{{trending_question.title}}</h2>
                         
                     </div>
                     <div class="row">
+                        {% with answers=trending_question.answers %}
+                        {% for answer in answers %}
                         <div class="col-md-3 col-6">
                             <div class="question-item">
                                 <div class="img-container">
-                                    <img src="assets/images/messi.jpg" class="img-fluid" alt="">
+                                    <img src="{{answer.image.url}}" class="img-fluid" alt="">
                                 </div>
-                                <div class="name">Messi</div>
+                                <div class="name">{{answer.title}}</div>
                                 <a href="" class="vote">
                                     <i class="fa fa-thumbs-up"></i>
                                 </a>
                             </div>
                         </div>
-                        <div class="col-md-3 col-6">
-                            <div class="question-item">
-                                <div class="img-container">
-                                    <img src="assets/images/ronaldo.jpg" class="img-fluid" alt="">
-                                </div>
-                                <div class="name">Ronaldo</div>
-                                <a href="" class="vote">
-                                    <i class="fa fa-thumbs-up"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-6">
-                            <div class="question-item">
-                                <div class="img-container">
-                                    <img src="assets/images/salah.jpg" class="img-fluid" alt="">
-                                </div>
-                                <div class="name">Salah</div>
-                                <a href="" class="vote">
-                                    <i class="fa fa-thumbs-up"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-6">
-                            <div class="question-item">
-                                <div class="img-container">
-                                    <img src="assets/images/nemar.jpeg" class="img-fluid" alt="">
-                                </div>
-                                <div class="name">Nemar Jr.</div>
-                                <a href="" class="vote">
-                                    <i class="fa fa-thumbs-up"></i>
-                                </a>
-                            </div>
-                        </div>
+                        {% endfor %}
+                        {% endwith %}
                     </div>
                     <div class="more-btn">
-                        <a href="" class="btn btn-primary">Show More</a>
+                        <a href="{% url 'poll' trending_question.slug %}" class="btn btn-primary">Show More</a>
                     </div>
                 </div>
                
@@ -443,4 +265,7 @@
         </div>
     </div>
 
+{% endblock %}
+
+{% block javascript %}
 {% endblock %}
