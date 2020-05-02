@@ -5,20 +5,22 @@ from .models import Category, Tag, Question, Answer, GuestUser, GuestUserLog, Us
 # Register your models here.
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['title', 'category_image', 'parent', 'status']
-    readonly_fields = ['category_image']
+    readonly_fields = ['slug','category_image']
 
-    # image show in admin lsit
     def category_image(self, obj):
-        if obj.id:
-            return '<img src="%s" height="150">' % obj.image.url
-        return ''
+        if obj.image:
+            return mark_safe('<img src="%s" width="150" height="150" />' % (obj.image.url))
 
-    category_image.allow_tags = True
+    category_image.short_description = 'Image'
+
+
+class QuestionAdmin(admin.ModelAdmin):
+    readonly_fields = ['slug']
 
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Tag)
-admin.site.register(Question)
+admin.site.register(Question, QuestionAdmin)
 admin.site.register(Answer)
 admin.site.register(GuestUser)
 admin.site.register(UserVote)
