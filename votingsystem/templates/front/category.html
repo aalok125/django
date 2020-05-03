@@ -29,210 +29,45 @@
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item">
-						<a href="index.html"><i class="fa fa-home"></i> Home</a>
+						<a href="{% url 'home' %}"><i class="fa fa-home"></i> Home</a>
 					</li>
 					<li class="breadcrumb-item">
-						<a href="index.html"><i class="fa fa-futbol"></i> Sports</a>
-					</li>
-					<li class="breadcrumb-item active" aria-current="page">Football</li>
+						<a href="{% url 'category' category.slug  %}"><i class="fa fa-futbol"></i> Sports</a>
 				</ol>
 			</nav>
+			<div class="heading">
+				<h3 style="text-align: center;">Choose Sub Category</h3>
+			</div>
 			<!-- Tab panes -->
 			<div class="catpage-content">
+				
 				<div class="row">
-					<div class="col-md-3 col-6">
-						<a href="votingPage.html">
-							<div class="cat-item">
-								<div class="img-container">
-									<img
-										src="assets/images/football.jpg"
-										class="img-fluid"
-										alt=""
-									/>
+					{% for child in category.children %}
+						<div class="col-md-3 col-6">
+							<a href="{% url 'category_questions' parent_cat=category.slug child_cat=child.slug %}">
+								<div class="cat-item">
+									<div class="img-container">
+										<img
+											src="{{ child.image.url }}"
+											class="img-fluid"
+											alt=""
+										/>
+									</div>
+									<div class="cat-title">
+										{{child.title}}
+									</div>
+									<div class="cat-info">
+										<div class="item-count">
+											<i class="fa fa-list"></i> 120
+										</div>
+										<div class="vote-count">
+										<i class="fa fa-poll"></i> Played: 30000
+										</div>
+									</div>
 								</div>
-								<div class="cat-title">
-									Best Player
-                                </div>
-                                <div class="cat-info">
-                                    <div class="item-count">
-                                        <i class="fa fa-list"></i> 120
-                                    </div>
-                                    <div class="vote-count">
-                                       <i class="fa fa-poll"></i> Played: 30000
-                                    </div>
-                                </div>
-							</div>
-						</a>
-					</div>
-					<div class="col-md-3 col-6">
-						<a href="votingPage.html">
-							<div class="cat-item">
-								<div class="img-container">
-									<img
-										src="assets/images/cricket.jpg"
-										class="img-fluid"
-										alt=""
-                                    />
-                                   
-								</div>
-								<div class="cat-title">
-									Best Stadium
-                                </div>
-                                <div class="cat-info">
-                                    <div class="item-count">
-                                        <i class="fa fa-list"></i> 120
-                                    </div>
-                                    <div class="vote-count">
-                                       <i class="fa fa-poll"></i> Played: 30000
-                                    </div>
-                                </div>
-							</div>
-						</a>
-					</div>
-					<div class="col-md-3 col-6">
-						<a href="votingPage.html">
-							<div class="cat-item">
-								<div class="img-container">
-									<img
-										src="assets/images/volleyball.jpg"
-										class="img-fluid"
-										alt=""
-									/>
-								</div>
-								<div class="cat-title">
-									Best Clubs
-                                </div>
-                                <div class="cat-info">
-                                    <div class="item-count">
-                                        <i class="fa fa-list"></i> 120
-                                    </div>
-                                    <div class="vote-count">
-                                       <i class="fa fa-poll"></i> Played: 30000
-                                    </div>
-                                </div>
-							</div>
-						</a>
-					</div>
-					<div class="col-md-3 col-6">
-						<a href="votingPage.html">
-							<div class="cat-item">
-								<div class="img-container">
-									<img
-										src="assets/images/basketball.jpg"
-										class="img-fluid"
-										alt=""
-									/>
-								</div>
-								<div class="cat-title">
-									Best Country
-                                </div>
-                                <div class="cat-info">
-                                    <div class="item-count">
-                                        <i class="fa fa-list"></i> 120
-                                    </div>
-                                    <div class="vote-count">
-                                       <i class="fa fa-poll"></i> Played: 30000
-                                    </div>
-                                </div>
-							</div>
-						</a>
-					</div>
-					<div class="col-md-3 col-6">
-						<a href="votingPage.html">
-							<div class="cat-item">
-								<div class="img-container">
-									<img
-										src="assets/images/volleyball.jpg"
-										class="img-fluid"
-										alt=""
-									/>
-								</div>
-								<div class="cat-title">
-									Best League
-                                </div>
-                                <div class="cat-info">
-                                    <div class="item-count">
-                                        <i class="fa fa-list"></i> 120
-                                    </div>
-                                    <div class="vote-count">
-                                       <i class="fa fa-poll"></i> Played: 30000
-                                    </div>
-                                </div>
-							</div>
-						</a>
-					</div>
-					<div class="col-md-3 col-6">
-						<a href="votingPage.html">
-							<div class="cat-item">
-								<div class="img-container">
-									<img
-										src="assets/images/basketball.jpg"
-										class="img-fluid"
-										alt=""
-									/>
-								</div>
-								<div class="cat-title">
-									Best Coach
-                                </div>
-                                <div class="cat-info">
-                                    <div class="item-count">
-                                        <i class="fa fa-list"></i> 120
-                                    </div>
-                                    <div class="vote-count">
-                                       <i class="fa fa-poll"></i> Played: 30000
-                                    </div>
-                                </div>
-							</div>
-						</a>
-					</div>
-					<div class="col-md-3 col-6">
-						<a href="votingPage.html">
-							<div class="cat-item">
-								<div class="img-container">
-									<img
-										src="assets/images/football.jpg"
-										class="img-fluid"
-										alt=""
-									/>
-								</div>
-								<div class="cat-title">
-									Best Manager
-                                </div>
-                                <div class="cat-info">
-                                    <div class="item-count">
-                                        <i class="fa fa-list"></i> 120
-                                    </div>
-                                    <div class="vote-count">
-                                       <i class="fa fa-poll"></i> Played: 30000
-                                    </div>
-                                </div>
-							</div>
-						</a>
-					</div>
-					<div class="col-md-3 col-6">
-						<a href="votingPage.html">
-							<div class="cat-item">
-								<div class="img-container">
-									<img
-										src="assets/images/cricket.jpg"
-										class="img-fluid"
-										alt=""
-									/>
-								</div>
-								<div class="cat-title">
-									Best Jersey
-                                </div>
-                                <div class="cat-info">
-                                    <div class="item-count">
-                                        <i class="fa fa-list"></i> 120
-                                    </div>
-                                    <div class="vote-count">
-                                       <i class="fa fa-poll"></i> Played: 30000
-                                    </div>
-                                </div>
-							</div>
-						</a>
-					</div>
+							</a>
+						</div>
+					{% endfor %}
 				</div>
 			</div>
 		</div>

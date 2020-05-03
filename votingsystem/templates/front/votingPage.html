@@ -33,20 +33,19 @@
 {% endblock %}
 {% block contents %}
 
-
 	<div class="category-section category-page-section">
 		<div class="container" id="cataccordion">
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item">
-						<a href="index.html"><i class="fa fa-home"></i> Home</a>
+						<a href="{% url 'home' %}"><i class="fa fa-home"></i> Home</a>
 					</li>
 					<li class="breadcrumb-item">
-						<a href="index.html"><i class="fa fa-futbol"></i> Sports</a>
-					</li>
-					<li class="breadcrumb-item">
-						<a href="category.html"><i class="fa fa-futbol"></i> Football</a>
-					</li>
+                        <a href="{% url 'category' question.category.parent.slug  %}"><i class="{{question.category.parent.icon}}"></i> {{question.category.parent.title}}</a>
+                    </li>
+                    <li class="breadcrumb-item" aria-current="page">
+                        <a href="{% url 'category_questions' parent_cat=question.category.parent.slug child_cat=question.category.slug %}"><i class="{{question.category.icon}}"></i> {{question.category.title}}</a>
+                    </li>
 					<li class="breadcrumb-item active" aria-current="page">
 						Best Player
 					</li>
@@ -60,8 +59,12 @@
 				<div class="loader_container">
 					<div class="loader"></div>
 				</div>
+				<form action="{% url 'vote_now' question.pk  %}" id="vote_submit" method="post" >
+					{% csrf_token %}
+					<input type="hidden" name="option" id="answer_id">
+					<!-- <button  type="submit">submit</button> -->
+				</form>
 				<div class="row answer_container">
-
 					<!-- Template tag not displayed in from -->
 					<template id="player_card">
 						<div class="col-md-3 col-6">
@@ -69,7 +72,7 @@
 								<div class="img-container">
 									<img src="assets/images/messi.jpg" class="img-fluid" alt="" />
 									<div class="vote-btn">
-										<a href="votingResult.html"><i class="fa fa-thumbs-up"></i> Vote</a>
+										<a href="#"><i class="fa fa-thumbs-up"></i> Vote</a>
 									</div>
 								</div>
 								<div class="name">
@@ -101,7 +104,8 @@
 
 		var typingTimer;                //timer identifier
 		var doneTypingInterval = 1500;  //time in ms (5 seconds)
-		var myInput = document.getElementById('search_field');
+		var myInput = document.getElementById('answer_id');
+
 
 		//on keyup, start the countdown
 		myInput.addEventListener('input', () => {
@@ -113,7 +117,8 @@
 				typingTimer = setTimeout(doneTyping, doneTypingInterval);
 			}
 		});
-		
+		// var myVote = document.getElementById('')
+		// $('form')[0].submit();
 
 		//user is "finished typing", perform search
 		function doneTyping () {
@@ -133,16 +138,16 @@
 					$('.answer_container').empty();
 					
 					$.each(data, function(key, value){
-						console.log(value)
-						var url = ''
+						// console.log(value)
+						answer_id = value.pk
 						var img = '{{ MEDIA_URL }}'+value.fields.image;
 						var preview = jQuery(
 						'<div class="col-md-3 col-6">'+
 							'<div class="voting-item">'+
 							'<div class="img-container">'+
 								'<img src="'+img+'" class="img-fluid" alt="" />'+
-								'<div class="vote-btn">'+
-									'<a href="'+url+'"><i class="fa fa-thumbs-up"></i> Vote</a>'+
+								'<div class="vote-btn" >'+
+									'<a href="#" class="vote_now" id="'+answer_id+'"><i class="fa fa-thumbs-up"></i> Vote</a>'+
 								'</div>'+
 							'</div>'+
 							'<div class="name">'+
@@ -152,11 +157,20 @@
 						'</div>');
 
 						$('.answer_container').append(preview);
+						
 					})
 					if(data.length == 0){
                         var preview = jQuery('<h3>No Result Found.</h3>');
                         $('.answer_container').append(preview);
                     }
+					else{
+						$('.vote_now').click(function(e){
+							e.preventDefault();
+							var id = $(this).attr('id');
+							$('#answer_id').val(id);
+							$('#vote_submit').submit();
+						})
+					}
 				},
 				error: function(error_data){
 					console.log("error")
@@ -164,6 +178,8 @@
 				}
 			})
 		}
+
 	</script>
 
+	<!-- vote button submit -->
 {% endblock %}

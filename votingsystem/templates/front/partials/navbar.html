@@ -1,3 +1,4 @@
+{% load static %}
 <div id="myNav" class="overlay">
 	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
 		>&times;</a
@@ -13,7 +14,7 @@
 <div class="navbar">
 	<a href="{% url 'home' %}" class="logo-container">
 		<div class="img-container">
-			<img src="assets/images/logo.png" alt="" class="img-fluid" />
+			<img src="{% static 'front/images/logo.png' %}" alt="" class="img-fluid" />
 		</div>
 		<div class="company-name">Vote Anything</div>
 	</a>

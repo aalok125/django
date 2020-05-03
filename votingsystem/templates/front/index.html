@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block contents %}
-	
+{% load static %}	
 	<div class="banner">
 		<div class="banner-content container">
 			<div class="recent-searches">
@@ -30,8 +30,9 @@
 			<form action="">
 				<div class="form-group search">
 					<input
-						type="text"
-						placeholder="Search for category"
+                        type="text"
+                        id="dynamic_search"
+						placeholder="Search for your interested topic"
 						class="form-control"
 					/>
 				</div>
@@ -78,7 +79,7 @@
 								{% if category.children %}
 								{% for child in category.children %}
 								<div class="col-md-3 col-6">
-									<a href="category.html">
+									<a href="{% url 'category_questions' parent_cat=category.slug child_cat=child.slug %}">
 										<div class="cat-item">
 											<div class="img-container">
 												<img
@@ -135,7 +136,7 @@
                         {% endwith %}
                     </div>
                     <div class="more-btn">
-                        <a href="{% url 'poll' trending_question.slug %}" class="btn btn-primary">Show More</a>
+                        <a href="{% url 'poll' trending_question.slug %}" class="btn btn-primary">Show More Choices</a>
                     </div>
                 </div>
                
@@ -154,7 +155,7 @@
                             <div class="col-md-12">
                                 <a href="" class="blog-item">
                                     <div class="img-container">
-                                        <img src="assets/images/cricket.jpg" alt="" class="img-fluid">
+                                        <img src="{% static 'front/images/cricket.jpg' %}" alt="" class="img-fluid">
                                         <div class="img-overylay">
                                                 <div class="overlay-text">
                                                     <div class="title">
@@ -171,7 +172,7 @@
                             <div class="col-md-6">
                                 <a href="" class="blog-item">
                                     <div class="img-container">
-                                        <img src="assets/images/basketball.jpg" alt="" class="img-fluid">
+                                        <img src="{% static 'front/images/basketball.jpg' %}" alt="" class="img-fluid">
                                         <div class="img-overylay">
                                                 <div class="overlay-text">
                                                     <div class="title">
@@ -188,7 +189,7 @@
                             <div class="col-md-6">
                                 <a href="" class="blog-item">
                                     <div class="img-container">
-                                        <img src="assets/images/basketball.jpg" alt="" class="img-fluid">
+                                        <img src="{% static 'front/images/basketball.jpg' %}" alt="" class="img-fluid">
                                         <div class="img-overylay">
                                                 <div class="overlay-text">
                                                     <div class="title">
@@ -210,7 +211,7 @@
                             <div class="col-md-12">
                                 <a href="" class="blog-item">
                                     <div class="img-container">
-                                        <img src="assets/images/cricket.jpg" alt="" class="img-fluid">
+                                        <img src="{% static 'front/images/cricket.jpg' %}" alt="" class="img-fluid">
                                         <div class="img-overylay">
                                                 <div class="overlay-text">
                                                     <div class="title">
@@ -227,7 +228,7 @@
                             <div class="col-md-12">
                                 <a href="" class="blog-item">
                                     <div class="img-container">
-                                        <img src="assets/images/volleyball.jpg" alt="" class="img-fluid">
+                                        <img src="{% static 'front/images/volleyball.jpg' %}" alt="" class="img-fluid">
                                         <div class="img-overylay">
                                                 <div class="overlay-text">
                                                     <div class="title">
@@ -244,7 +245,7 @@
                             <div class="col-md-12">
                                 <a href="" class="blog-item">
                                     <div class="img-container">
-                                        <img src="assets/images/basketball.jpg" alt="" class="img-fluid">
+                                        <img src="{% static 'front/images/basketball.jpg' %}" alt="" class="img-fluid">
                                         <div class="img-overylay">
                                                 <div class="overlay-text">
                                                     <div class="title">
@@ -268,4 +269,74 @@
 {% endblock %}
 
 {% block javascript %}
+
+    <script>
+
+        var typingTimer;                //timer identifier
+        var doneTypingInterval = 1500;  //time in ms (5 seconds)
+        var myInput = document.getElementById('dynamic_search');
+
+        //on keyup, start the countdown
+        myInput.addEventListener('input', () => {
+            if (myInput.value == '') { // check if value changed
+                doneTyping()
+            }
+            clearTimeout(typingTimer);
+            if (myInput.value) {
+                typingTimer = setTimeout(doneTyping, doneTypingInterval);
+            }
+        });
+        
+
+        //user is "finished typing", perform search
+        function doneTyping () {
+            search = myInput.value ? myInput.value : ""
+            $.ajax({
+                url: "/filter_category",
+                method: 'GET',
+                data: {
+                    'title':search,
+                },
+                beforeSend:function(data){
+                    $('.dropdown_container').show()
+                },
+                success: function(data){
+                    console.log(data)
+                    $('.dropdown_container').hide();
+                    $('.dropdown_container').empty();
+                    
+                    // $.each(data, function(key, value){
+                    //     console.log(value)
+                    //     var url = ''
+                    //     var img = '{{ MEDIA_URL }}'+value.fields.image;
+                    //     var preview = jQuery(
+                    //     '<div class="col-md-3 col-6">'+
+                    //         '<div class="voting-item">'+
+                    //         '<div class="img-container">'+
+                    //             '<img src="'+img+'" class="img-fluid" alt="" />'+
+                    //             '<div class="vote-btn">'+
+                    //                 '<a href="'+url+'"><i class="fa fa-thumbs-up"></i> Vote</a>'+
+                    //             '</div>'+
+                    //         '</div>'+
+                    //         '<div class="name">'+
+                    //             value.fields.title+
+                    //         '</div>'+
+                    //         '</div>'+			
+                    //     '</div>');
+
+                    //     $('.answer_container').append(preview);
+                    // })
+                    // if(data.length == 0){
+                    //     var preview = jQuery('<h3>No Result Found.</h3>');
+                    //     $('.answer_container').append(preview);
+                    // }
+                },
+                error: function(error_data){
+                    console.log("error")
+                    console.log(error_data)
+                }
+            })
+        }
+    </script>
+
 {% endblock %}
