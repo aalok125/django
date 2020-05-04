@@ -1,0 +1,185 @@
+{% extends "front/master.html" %}
+
+{% block stylesheet %}
+	<style>
+		.loader_container{
+			height: 360px;
+			padding-top: 120px;
+			padding-bottom: 120px;
+			padding-left: 40%;
+		}
+		.loader {
+			text-align: center;
+		border: 16px solid #f3f3f3;
+		border-radius: 50%;
+		border-top: 16px solid #3498db;
+		width: 120px;
+		height: 120px;
+		-webkit-animation: spin 2s linear infinite; /* Safari */
+		animation: spin 2s linear infinite;
+		}
+		
+		/* Safari */
+		@-webkit-keyframes spin {
+		0% { -webkit-transform: rotate(0deg); }
+		100% { -webkit-transform: rotate(360deg); }
+		}
+		
+		@keyframes spin {
+		0% { transform: rotate(0deg); }
+		100% { transform: rotate(360deg); }
+		}
+	</style>
+{% endblock %}
+{% block contents %}
+
+	<div class="category-section category-page-section">
+		<div class="container" id="cataccordion">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item">
+						<a href="{% url 'home' %}"><i class="fa fa-home"></i> Home</a>
+					</li>
+					<li class="breadcrumb-item">
+                        <a href="{% url 'category' question.category.parent.slug  %}"><i class="{{question.category.parent.icon}}"></i> {{question.category.parent.title}}</a>
+                    </li>
+                    <li class="breadcrumb-item" aria-current="page">
+                        <a href="{% url 'category_questions' parent_cat=question.category.parent.slug child_cat=question.category.slug %}"><i class="{{question.category.icon}}"></i> {{question.category.title}}</a>
+                    </li>
+					<li class="breadcrumb-item active" aria-current="page">
+						Best Player
+					</li>
+				</ol>
+			</nav>
+			<!-- Tab panes -->
+			<div class="voting-content">
+				<div class="voting-question">
+					<h1>Vote for the {{question.title}}</h1>
+				</div>
+				<div class="loader_container">
+					<div class="loader"></div>
+				</div>
+				<form action="{% url 'vote_now' question.pk  %}" id="vote_submit" method="post" >
+					{% csrf_token %}
+					<input type="hidden" name="option" id="answer_id">
+					<!-- <button  type="submit">submit</button> -->
+				</form>
+				<div class="row answer_container">
+					<!-- Template tag not displayed in from -->
+					<template id="player_card">
+						<div class="col-md-3 col-6">
+							<div class="voting-item">	
+								<div class="img-container">
+									<img src="assets/images/messi.jpg" class="img-fluid" alt="" />
+									<div class="vote-btn">
+										<a href="#"><i class="fa fa-thumbs-up"></i> Vote</a>
+									</div>
+								</div>
+								<div class="name">
+									Lionel Messi
+								</div>
+							</div>
+						</div>
+					</template>
+				</div>
+				<div class="item-search">
+					<div class="item-search-title">
+							Not Listed
+					</div>
+					<input type="text" id="search_field" class="form-control" placeholder="Search">
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block javascript %}
+
+	<script>
+		$(document).ready(function(){
+			//initial data load
+			doneTyping();
+		});
+
+		var typingTimer;                //timer identifier
+		var doneTypingInterval = 1500;  //time in ms (5 seconds)
+		var myInput = document.getElementById('answer_id');
+
+
+		//on keyup, start the countdown
+		myInput.addEventListener('input', () => {
+			if (myInput.value == '') { // check if value changed
+				doneTyping()
+			}
+			clearTimeout(typingTimer);
+			if (myInput.value) {
+				typingTimer = setTimeout(doneTyping, doneTypingInterval);
+			}
+		});
+		// var myVote = document.getElementById('')
+		// $('form')[0].submit();
+
+		//user is "finished typing", perform search
+		function doneTyping () {
+			search = myInput.value ? myInput.value : ""
+			$.ajax({
+				url: "{% url 'filter_options' question.slug %}",
+				method: 'POST',
+				data: {
+					'search_text':search,
+					'csrfmiddlewaretoken': $('meta[name="csrf-token"]').attr('content')
+				},
+				beforeSend:function(data){
+					$('.loader_container').show()
+				},
+				success: function(data){
+					$('.loader_container').hide();
+					$('.answer_container').empty();
+					
+					$.each(data, function(key, value){
+						// console.log(value)
+						answer_id = value.pk
+						var img = '{{ MEDIA_URL }}'+value.fields.image;
+						var preview = jQuery(
+						'<div class="col-md-3 col-6">'+
+							'<div class="voting-item">'+
+							'<div class="img-container">'+
+								'<img src="'+img+'" class="img-fluid" alt="" />'+
+								'<div class="vote-btn" >'+
+									'<a href="#" class="vote_now" id="'+answer_id+'"><i class="fa fa-thumbs-up"></i> Vote</a>'+
+								'</div>'+
+							'</div>'+
+							'<div class="name">'+
+								value.fields.title+
+							'</div>'+
+							'</div>'+			
+						'</div>');
+
+						$('.answer_container').append(preview);
+						
+					})
+					if(data.length == 0){
+                        var preview = jQuery('<h3>No Result Found.</h3>');
+                        $('.answer_container').append(preview);
+                    }
+					else{
+						$('.vote_now').click(function(e){
+							e.preventDefault();
+							var id = $(this).attr('id');
+							$('#answer_id').val(id);
+							$('#vote_submit').submit();
+						})
+					}
+				},
+				error: function(error_data){
+					console.log("error")
+					console.log(error_data)
+				}
+			})
+		}
+
+	</script>
+
+	<!-- vote button submit -->
+{% endblock %}

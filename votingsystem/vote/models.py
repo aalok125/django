@@ -18,6 +18,9 @@ class Category(models.Model):
     def __str__(self):
         return self.title
 
+    def children(self):
+        return Category.objects.filter(parent = self.id)
+
 
 class Tag(models.Model):
     title = models.CharField(max_length=225, unique=True)
