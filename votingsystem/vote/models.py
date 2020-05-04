@@ -3,7 +3,6 @@ from django.utils.text import slugify
 from django.db.models.signals import pre_save
 from votingsystem.utils import unique_slug_generator
 
-
 # Create your models here.
 
 class Category(models.Model):

@@ -11,7 +11,6 @@ urlpatterns = [
     path('filter_category/',views.filter_category, name="filter_category"),  #url for ajax filter of options
     path('<int:ques_pk>/vote_now/',views.VoteNowView.as_view(),name="vote_now"),
     path('result/<str:question_slug>',views.PollResultView.as_view(), name="result"),
-    
 ]
 
 handler404 = 'vote.views.error_404_view'
