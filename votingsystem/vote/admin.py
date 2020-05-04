@@ -3,6 +3,13 @@ from django.utils.html import mark_safe
 from .models import Category, Tag, Question, Answer, GuestUser, GuestUserLog, UserSearchLog, UserVote
 
 # Register your models here.
+
+admin.site.site_header = "Vote Anything"
+admin.site.site_title = "Vote Anything"
+admin.site.index_title = "Welcome to Vote Anything Admin Panel"
+
+
+
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['title', 'category_image', 'parent', 'status']
     readonly_fields = ['slug','category_image']
