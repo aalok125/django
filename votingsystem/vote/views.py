@@ -27,8 +27,12 @@ class HomeView(View):
             category.active = True
             break
         count = Question.objects.count()
-        trending_question = Question.objects.all()[randint(0, count - 1)]
-        trending_question.answers = trending_question.answer_set.all()[:5]
+        if count > 0 :
+            trending_question = Question.objects.all()[randint(0, count - 1)]
+            trending_question.answers = trending_question.answer_set.all()[:5]
+        else:
+            trending_question = ""
+            trending_question.answers = ""
         dictionary = {
             'categories':categories,
             'trending_question':trending_question,
