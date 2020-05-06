@@ -55,6 +55,7 @@ class GuestUser(models.Model):
     UserStatus = ('Active', 'Active'), ('Inactive', 'Inactive'), ('Block','Block'), ('Suspended', 'Suspended')
 
     ipaddress = models.GenericIPAddressField(unique=True)
+    uuid = models.CharField(max_length=255,unique=True, null=True, blank=True)
     latitude = models.CharField(max_length=255, null=True, blank=True)
     longitude = models.CharField(max_length=255, null=True, blank=True)
     status = models.CharField(max_length=20, null=True, blank=True, choices=UserStatus)

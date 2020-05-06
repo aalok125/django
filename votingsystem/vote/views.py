@@ -113,6 +113,9 @@ class PollPageView(View):
         return render(request,self.template_name, context=dictionary)
 
 class VoteNowView(View):
+    @method_decorator(attempt_check)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
     def post(self, request, ques_pk):
         if(request.POST):
             try:
