@@ -24,7 +24,7 @@
 					<li>
 						<a href=""><i class="fa fa-user"></i> Actors</a>
 					</li>
-					
+
 				</ul>
 			</div>
 			<form action="">
@@ -55,7 +55,7 @@
 				<i class="fa fa-arrow-right"></i>
 			</div>
 			<div class="category-nav nav-pills">
-				
+
 				{% for category in categories %}
 					<li class="nav-item">
 						<a
@@ -100,7 +100,7 @@
 						</div>
 					</div>
 				{% endfor %}
-				
+
 			</div>
 		</div>
     </div>
@@ -110,13 +110,13 @@
                 Most Trending Voting Question
             </div>
 
-           
-           
+
+
             <div class="trending-content">
                 <div class="trending-question-item">
                     <div class="trending-title">
                         <h2>{{trending_question.title}}</h2>
-                        
+
                     </div>
                     <div class="row">
                         {% with answers=trending_question.answers %}
@@ -139,7 +139,7 @@
                         <a href="{% url 'poll' trending_question.slug %}" class="btn btn-primary">Show More Choices</a>
                     </div>
                 </div>
-               
+
             </div>
         </div>
     </div>
@@ -204,7 +204,7 @@
                                 </a>
                             </div>
                         </div>
-                       
+
                     </div>
                     <div class="col-md-4">
                         <div class="row">
