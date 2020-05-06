@@ -10,7 +10,10 @@ def get_index_title(list, index):
 
 @register.filter
 def get_index_image(list, index):
-    return list[index].image.url
+    if list[index].image:
+        return list[index].image.url
+    else:
+        return None
 
 @register.filter
 def get_index_votes(list, index):

@@ -123,7 +123,7 @@ class VoteNowView(View):
                 uservote.save()
             except Answer.DoesNotExist:
                 raise Http404("Answer Not Found")
-            return HttpResponse('vote registered')
+            return redirect('result',answer.question.slug)
         else:
             raise Http404
 

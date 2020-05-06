@@ -41,10 +41,10 @@
 						<a href="{% url 'home' %}"><i class="fa fa-home"></i> Home</a>
 					</li>
 					<li class="breadcrumb-item">
-                        <a href="{% url 'category' question.category.parent.slug  %}"><i class="{{question.category.parent.icon}}"></i> {{question.category.parent.title}}</a>
+                        <a href="{% url 'category' question.category.parent.slug  %}"><i class="{% if question.category.parent.icon %}{{ question.category.parent.icon }}{% endif %}"></i> {{question.category.parent.title}}</a>
                     </li>
                     <li class="breadcrumb-item" aria-current="page">
-                        <a href="{% url 'category_questions' parent_cat=question.category.parent.slug child_cat=question.category.slug %}"><i class="{{question.category.icon}}"></i> {{question.category.title}}</a>
+                        <a href="{% url 'category_questions' parent_cat=question.category.parent.slug child_cat=question.category.slug %}"><i class="{% if question.category.icon %}{{question.category.icon}}{% endif %}"></i> {{question.category.title}}</a>
                     </li>
 					<li class="breadcrumb-item active" aria-current="page">
 						Best Player
@@ -140,7 +140,7 @@
 					$.each(data, function(key, value){
 						// console.log(value)
 						answer_id = value.pk
-						var img = '{{ MEDIA_URL }}'+value.fields.image;
+						var img = value.fields.image ? '{{ MEDIA_URL }}'+value.fields.image : null;
 						var preview = jQuery(
 						'<div class="col-md-3 col-6">'+
 							'<div class="voting-item">'+

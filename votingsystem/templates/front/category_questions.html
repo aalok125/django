@@ -54,7 +54,7 @@
 								<div class="cat-item">
 									<div class="img-container">
 										<img
-											src="{{question.image.url}}"
+											src="{% if question.image %} {{question.image.url}} {% endif %}"
 											class="img-fluid"
 											alt=""
 										/>

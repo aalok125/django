@@ -48,7 +48,7 @@
 								<div class="cat-item">
 									<div class="img-container">
 										<img
-											src="{{ child.image.url }}"
+											src="{% if child.image %}{{ child.image.url }}{{ endif }}"
 											class="img-fluid"
 											alt=""
 										/>

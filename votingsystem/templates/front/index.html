@@ -83,7 +83,7 @@
 										<div class="cat-item">
 											<div class="img-container">
 												<img
-													src="{{child.image.url}}"
+													src="{% if child.image %} {{child.image.url}} {% endif %}"
 													class="img-fluid"
 													alt=""
 												/>
@@ -116,23 +116,28 @@
                 <div class="trending-question-item">
                     <div class="trending-title">
                         <h2>{{trending_question.title}}</h2>
-
                     </div>
                     <div class="row">
                         {% with answers=trending_question.answers %}
+                        {% if answers.count > 0 %}
                         {% for answer in answers %}
-                        <div class="col-md-3 col-6">
-                            <div class="question-item">
-                                <div class="img-container">
-                                    <img src="{{answer.image.url}}" class="img-fluid" alt="">
+                            <div class="col-md-3 col-6">
+                                <div class="question-item">
+                                    <div class="img-container">
+                                        <img src="{% if answer.image %} {{answer.image.url}} {% endif %}" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="name">{{answer.title}}</div>
+                                    <a href="" class="vote">
+                                        <i class="fa fa-thumbs-up"></i>
+                                    </a>
                                 </div>
-                                <div class="name">{{answer.title}}</div>
-                                <a href="" class="vote">
-                                    <i class="fa fa-thumbs-up"></i>
-                                </a>
                             </div>
-                        </div>
                         {% endfor %}
+                        {% else %}
+                            <div class="col-md-6-m-3 col-12">
+                                <h4>This poll has no options</h4>
+                            </div>
+                        {% endif %}
                         {% endwith %}
                     </div>
                     <div class="more-btn">
