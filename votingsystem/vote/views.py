@@ -113,17 +113,17 @@ class PollPageView(View):
         return render(request,self.template_name, context=dictionary)
 
 class VoteNowView(View):
-    @method_decorator(attempt_check)
-    def dispatch(self, *args, **kwargs):
-        return super().dispatch(*args, **kwargs)
     def post(self, request, ques_pk):
         if(request.POST):
             try:
                 answer_id = request.POST.get('option')
-                guest_user = GuestUser.objects.get(pk=request.session.get('guest_user'))
+                guest_user = GuestUser.objects.get(pk=request.session.get('guest_user'), uuid = request.session.get('guest_uuid'))
                 answer = Answer.objects.get(pk=answer_id)
-                uservote = UserVote(guest_user = guest_user, answer = answer, question = answer.question)
-                uservote.save()
+                if (UserVote.objects.filter(guest_user=guest_user, question_id = answer.question.id)).exists():         
+                    return redirect('result',answer.question.slug)
+                else:
+                    uservote = UserVote(guest_user = guest_user, answer = answer, question = answer.question)
+                    uservote.save()
             except Answer.DoesNotExist:
                 raise Http404("Answer Not Found")
             return redirect('result',answer.question.slug)

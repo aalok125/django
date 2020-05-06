@@ -7,13 +7,15 @@ import requests
 def attempt_check(view_func):
     def wrapper_func(request,*args, **kwargs):
         guest_id = request.session.get('guest_user')
-        guest = GuestUser.objects.get(pk=guest_id)
+        guest_uuid = request.session.get('guest_uuid')
+        guest = GuestUser.objects.get(pk=guest_id, uuid = guest_uuid)
         question = Question.objects.get(slug = kwargs.get('question_slug')) 
         if (guest.uservote_set.filter(question = question)).exists():
             return redirect('result',question.slug)
         else:
             return view_func(request,*args, **kwargs)
     return wrapper_func
+
 
 def unauthenticated_user(view_func):
     def wrapper_func(request, *args, **kwargs):
