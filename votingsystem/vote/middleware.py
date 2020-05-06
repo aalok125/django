@@ -24,7 +24,7 @@ class IpSessionMiddleware:
                 if (GuestUser.objects.filter(ipaddress = user_ip)).exists():
                     user = GuestUser.objects.get(ipaddress = user_ip)
                     request.session["guest_user"] = user.id
-                    request.session["guest_ip"] = self.user_ip
+                    request.session["guest_ip"] = user_ip
                 else:
                     user = GuestUser(ipaddress = user_ip, status="Active")
                     user.save()

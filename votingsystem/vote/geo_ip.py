@@ -4,6 +4,5 @@ import requests
 
 def lon_lat(ip):
     g = GeoIP2(path=settings.GEOIP_DIR)
-
     return g.coords(ip) #Returns a coordinate tuple of (longitude, latitude).
 
